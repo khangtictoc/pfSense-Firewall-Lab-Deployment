@@ -291,7 +291,7 @@ Then access `facebook.com` again with the "Block-facebook-youtube" rule enabled.
 Try to create tunnel again:
 
 <p align="center">
-    <img height="100" width="500" src="images/illustrate_9.png" alt="pfsense-logo"> 
+    <img height="30" width="400" src="images/illustrate_9.png" alt="pfsense-logo"> 
    </p>
 
 The answer is "NO" !!!
