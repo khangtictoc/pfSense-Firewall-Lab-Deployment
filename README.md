@@ -4,6 +4,38 @@
 
 In this lab, we will deploy and test Pfsense's functionalities, using **VMWare** to simulate our network model.
 
+Table of Contents
+=================
+
+* [Pfsense Lab Deployment](#pfsense-lab-deployment)
+   * [Setup:](#setup)
+      * [Network model:](#network-model)
+      * [VMWare network configurations:](#vmware-network-configurations)
+      * [VM configurations:](#vm-configurations)
+   * [Basic rules:](#basic-rules)
+      * [0. Intro:](#0-intro)
+      * [1. Block local network (192.168.3.0/24-VM-B) ping to VM-A](#1-block-local-network-1921683024-vm-b-ping-to-vm-a)
+      * [2. Block local network (192.168.3.0/24-VM-B) from accessing website using port 80 (HTTP)](#2-block-local-network-1921683024-vm-b-from-accessing-website-using-port-80-http)
+      * [3. Block local network (192.168.3.0/24-VM-B) telnet to other areas](#3-block-local-network-1921683024-vm-b-telnet-to-other-areas)
+      * [4. Block local network (192.168.3.0/24-VM-B) from accessing facebook.com and youtube.com](#4-block-local-network-1921683024-vm-b-from-accessing-facebookcom-and-youtubecom)
+   * [Bypass Firewall by SSH Tunnel:](#bypass-firewall-by-ssh-tunnel)
+      * [1. Telnet to VM-A by SSH Tunnel](#1-telnet-to-vm-a-by-ssh-tunnel)
+      * [2. How is it possible? Was the packet go through the firewall ? Why did the firewall use this tunnel ? Please explain for me as detail as possible ?](#2-how-is-it-possible-was-the-packet-go-through-the-firewall--why-did-the-firewall-use-this-tunnel--please-explain-for-me-as-detail-as-possible-)
+      * [3. Connect to facebook.com by SSH Tunnel with <strong>Proxy configuration</strong>](#3-connect-to-facebookcom-by-ssh-tunnel-with-proxy-configuration)
+      * [4. Remove <strong>SSH Tunnel</strong>, clear <strong>Cache data</strong> on browser. Connect to facebook.com again.](#4-remove-ssh-tunnel-clear-cache-data-on-browser-connect-to-facebookcom-again)
+      * [5. If on Firewall, we block SSH (port 22). Can we still create tunnel ?](#5-if-on-firewall-we-block-ssh-port-22-can-we-still-create-tunnel-)
+   * [Web Proxy Deployment (Application Firewall)](#web-proxy-deployment-application-firewall)
+      * [0. Basic config](#0-basic-config)
+      * [1. Establish redirection URL](#1-establish-redirection-url)
+      * [2. Re-edit Perl code above with condition: when accessing "<a href="http://example.com" rel="nofollow">http://example.com</a>", an blocking-warn image floats in.](#2-re-edit-perl-code-above-with-condition-when-accessing-httpexamplecom-an-blocking-warn-image-floats-in)
+   * [VPN](#vpn)
+      * [0. Intro:](#0-intro-1)
+      * [1. What VPN connection protocols does pfSense Firewall support? What are the difference in their characteristics?](#1-what-vpn-connection-protocols-does-pfsense-firewall-support-what-are-the-difference-in-their-characteristics)
+      * [2. Research and configure on pfSense, so that from VM-B, we can open a VPN connection to pfSense server to access VM-A.](#2-research-and-configure-on-pfsense-so-that-from-vm-b-we-can-open-a-vpn-connection-to-pfsense-server-to-access-vm-a)
+   * [Backup &amp; Restore (Optional):](#backup--restore-optional)
+
+<!-- Created by https://github.com/ekalinin/github-markdown-toc -->
+
 ## Setup:
 
 ### Network model:
