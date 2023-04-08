@@ -557,11 +557,6 @@ Data encryption type, choose what you wish ^___^
 
 Now you're good to go (●'◡'●). Transfer this file to `VM-A`. On `VM-A`.
 
-<p align="center">
-    <img height="200" width="100" src="images/vpn_file_exported.png" alt="pfsense-logo"> 
-</p>
-
-
 Install openvpn service:
 
 ```bash
