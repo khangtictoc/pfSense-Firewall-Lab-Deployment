@@ -75,6 +75,38 @@ Set static IP for host Ubuntu:
 - Click on the network icon on the upper right corner => "Wired Connected" => "Wired Setting"
 - In "Wired", click on setting icon
 - Switch to "IPv4" tab, choose "Manual", fill in the necessary configurations based on above table
+- Edit `/etc/netplan/01-network-manager-all.yaml`
+
+```
+# Let NetworkManager manage all devices on this system
+network:
+  version: 2
+  renderer: NetworkManager
+  ethernets:
+    <YOUR_INTERFACE>:
+      dhcp4: no
+      addresses: [<YOUR_IP>/<YOUR_SUBNET_NUMBER>]
+      gateway4: <YOUR_GATEWAY>
+      nameservers:
+        addresses: [1.1.1.1, 1.0.0.1, 8.8.8.8, 8.8.4.4]
+```
+For example, mine is:
+
+```
+# Let NetworkManager manage all devices on this system
+network:
+  version: 2
+  renderer: NetworkManager
+  ethernets:
+    ens33:
+      dhcp4: no
+      addresses: [10.0.3.4/24]
+      gateway4: 10.0.3.2
+      nameservers:
+        addresses: [1.1.1.1, 1.0.0.1, 8.8.8.8, 8.8.4.4]
+```
+
+- Then execute `sudo netplan apply`
 - Reboot the computer (Any changes to network require this)
 
 Install pfsense:
