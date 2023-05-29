@@ -2,7 +2,7 @@
 
 # Pfsense Lab Deployment
 
-In this lab, we will deploy and test Pfsense's functionalities, using **VMWare** to simulate our network model.
+In this lab, we will deploy and test Pfsense's functionalities, using **VMWare Pro 16** to simulate our network model.
 
 Table of Contents
 =================
